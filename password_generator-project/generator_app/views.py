@@ -1,3 +1,4 @@
+from hashlib import blake2b
 from django.shortcuts import render
 from django.http import HttpResponse
 import random
@@ -20,8 +21,8 @@ def password(request):
 
     thepassword = ''
     
-    
-    if request.GET.get('uppercase'):
+    upper = request.GET.get('uppercase')
+    if upper:
         characters.extend(list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
 
     if request.GET.get('numbers'):
@@ -36,4 +37,4 @@ def password(request):
      
 
     
-    return render(request, 'generator_app/password.html', {'password' : thepassword,'lenght': lenght})
+    return render(request, 'generator_app/password.html', {'password' : thepassword,'lenght': lenght, 'upper': upper})
